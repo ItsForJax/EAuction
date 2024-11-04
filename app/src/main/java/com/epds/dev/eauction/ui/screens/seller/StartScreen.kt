@@ -1,5 +1,6 @@
 package com.epds.dev.eauction.ui.screens.seller
 
+import android.util.Log
 import com.epds.dev.eauction.R
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -24,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.epds.dev.eauction.ui.theme.AppTheme
+import com.epds.dev.eauction.utilities.SignIn
 
 
 @Composable
@@ -31,13 +33,15 @@ fun StartScreen() {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(32.dp)
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxHeight(0.66f)
+            modifier = Modifier
+                .fillMaxHeight(0.66f)
                 .fillMaxWidth()
         ){
             Text(
@@ -54,7 +58,8 @@ fun StartScreen() {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier
+                .fillMaxHeight()
                 .fillMaxWidth()
         ){
             Card(
@@ -78,7 +83,10 @@ fun StartScreen() {
                 }
 
             }
-            Spacer(Modifier.fillMaxWidth().height(14.dp))
+            Spacer(
+                Modifier
+                    .fillMaxWidth()
+                    .height(14.dp))
             Card(
                 shape = RoundedCornerShape(64.dp),
                 modifier = Modifier.fillMaxWidth(),
@@ -86,7 +94,8 @@ fun StartScreen() {
                 colors = CardDefaults.cardColors(
                     containerColor = AppTheme.colors.white,
                     contentColor = AppTheme.colors.base800
-                )
+                ),
+                onClick = { SignIn().test("Passing Data")}
             ) {
                 Column (
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -101,13 +110,19 @@ fun StartScreen() {
                 }
 
             }
-            Spacer(Modifier.fillMaxWidth().height(16.dp))
+            Spacer(
+                Modifier
+                    .fillMaxWidth()
+                    .height(16.dp))
             Text(
                 text = "or",
                 style = AppTheme.typography.buttonLarge,
                 color = AppTheme.colors.base900
             )
-            Spacer(Modifier.fillMaxWidth().height(16.dp))
+            Spacer(
+                Modifier
+                    .fillMaxWidth()
+                    .height(16.dp))
             Row (
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -126,7 +141,10 @@ fun StartScreen() {
                     contentDescription = "",
                     Modifier.size(42.dp))
             }
-            Spacer(Modifier.fillMaxWidth().height(24.dp))
+            Spacer(
+                Modifier
+                    .fillMaxWidth()
+                    .height(24.dp))
         }
     }
 }
