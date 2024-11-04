@@ -71,8 +71,8 @@ val extendedTypography = AppTypography(
     buttonLarge = TextStyle(
         fontFamily = interFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
-        lineHeight = 32.sp,
+        fontSize = 18.sp,
+        lineHeight = 24.sp,
         letterSpacing = (-0.01).em
     )
 )
