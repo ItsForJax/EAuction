@@ -20,12 +20,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             val windowInsetsController = WindowCompat.getInsetsController(window, LocalView.current)
             windowInsetsController.apply {
-                hide(WindowInsetsCompat.Type.systemBars())
+                hide(WindowInsetsCompat.Type.navigationBars())
                 systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
             AppTheme {
                 StartScreen()
             }
         }
+
     }
 }
