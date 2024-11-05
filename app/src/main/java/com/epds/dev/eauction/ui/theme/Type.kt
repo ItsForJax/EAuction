@@ -51,7 +51,12 @@ val extendedTypography = AppTypography(
         letterSpacing = 0.01.em
     ),
 
-    headingXS = TextStyle(),
+    headingXS = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 18.sp,
+        lineHeight = 28.sp
+    ),
 
     headingSmall = TextStyle(
         fontFamily = interFontFamily,
@@ -60,11 +65,22 @@ val extendedTypography = AppTypography(
         lineHeight = 33.sp
     ),
 
-    bodySmall = TextStyle(),
+    bodySmall = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 24.sp,
+    ),
 
     bodyExtraSmall = TextStyle(),
 
-    bodyMedium = TextStyle(),
+    bodyMedium = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 24.sp,
+        letterSpacing = (-0.01).em
+    ),
 
     span14px = TextStyle(),
 
