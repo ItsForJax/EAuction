@@ -1,6 +1,5 @@
-package com.epds.dev.eauction.ui.screens.seller
+package com.epds.dev.eauction.ui.screens.buyer.auth
 
-import android.util.Log
 import com.epds.dev.eauction.R
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
