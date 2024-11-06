@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 private val interFontFamily = FontFamily(
     Font(R.font.inter_bold, FontWeight.Bold, FontStyle.Normal),
     Font(R.font.inter_regular, FontWeight.Normal, FontStyle.Normal),
+    Font(R.font.inter_semi_bold, FontWeight.SemiBold, FontStyle.Normal),
 )
 
 @Immutable
@@ -27,6 +28,7 @@ data class AppTypography(
     val bodyMedium: TextStyle,
     val span14px: TextStyle,
     val buttonLarge: TextStyle,
+    val semiBold: TextStyle
 )
 
 val localAppTypography = staticCompositionLocalOf {
@@ -38,7 +40,8 @@ val localAppTypography = staticCompositionLocalOf {
         bodyExtraSmall = TextStyle.Default,
         bodyMedium = TextStyle.Default,
         span14px = TextStyle.Default,
-        buttonLarge = TextStyle.Default
+        buttonLarge = TextStyle.Default,
+        semiBold = TextStyle.Default
     )
 }
 
@@ -79,7 +82,7 @@ val extendedTypography = AppTypography(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         lineHeight = 24.sp,
-        letterSpacing = (-0.01).em
+        letterSpacing = (-0.01).em,
     ),
 
     span14px = TextStyle(),
@@ -88,6 +91,14 @@ val extendedTypography = AppTypography(
         fontFamily = interFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
+        lineHeight = 24.sp,
+        letterSpacing = (-0.01).em
+    ),
+
+    semiBold = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp,
         lineHeight = 24.sp,
         letterSpacing = (-0.01).em
     )
