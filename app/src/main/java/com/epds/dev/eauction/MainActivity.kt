@@ -27,6 +27,7 @@ import com.epds.dev.eauction.ui.screens.buyer.auth.StartScreen
 import com.epds.dev.eauction.ui.screens.buyer.main.CreateAuctionPage1Screen
 import com.epds.dev.eauction.ui.screens.buyer.main.CreateAuctionPage2Screen
 import com.epds.dev.eauction.ui.screens.buyer.main.HomeScreen
+import com.epds.dev.eauction.ui.screens.buyer.main.InboxScreen
 import com.epds.dev.eauction.ui.theme.AppTheme
 
 
@@ -49,7 +50,8 @@ class MainActivity : ComponentActivity() {
                 ) {
 //                    StartScreen()
 //                    CreateAuctionPage1Screen(modifier = Modifier.weight(1f))
-                    CreateAuctionPage2Screen(modifier = Modifier.weight(1f))
+//                    CreateAuctionPage2Screen(modifier = Modifier.weight(1f))
+                    InboxScreen(modifier = Modifier.weight(1f))
                     Column (modifier = Modifier.fillMaxWidth().height(75.dp).background(Color.Red)) {
                         Text("Sudo")
                     }
