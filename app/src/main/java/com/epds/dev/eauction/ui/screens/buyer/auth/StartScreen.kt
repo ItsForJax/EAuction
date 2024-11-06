@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.epds.dev.eauction.ui.screens.buyer.main.shared.Button
 import com.epds.dev.eauction.ui.theme.AppTheme
 import com.epds.dev.eauction.utilities.SignIn
 
@@ -61,54 +62,12 @@ fun StartScreen() {
                 .fillMaxHeight()
                 .fillMaxWidth()
         ){
-            Card(
-                shape = RoundedCornerShape(64.dp),
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = AppTheme.colors.base800,
-                    contentColor = AppTheme.colors.white
-                )
-            ) {
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Register",
-                        style = AppTheme.typography.buttonLarge,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
-
-            }
+            Button(title = "Register", filled = true)
             Spacer(
                 Modifier
                     .fillMaxWidth()
                     .height(14.dp))
-            Card(
-                shape = RoundedCornerShape(64.dp),
-                modifier = Modifier.fillMaxWidth(),
-                border = BorderStroke(2.dp, AppTheme.colors.base800),
-                colors = CardDefaults.cardColors(
-                    containerColor = AppTheme.colors.white,
-                    contentColor = AppTheme.colors.base800
-                ),
-                onClick = { SignIn().test("Passing Data")}
-            ) {
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Sign In",
-                        style = AppTheme.typography.buttonLarge,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
-
-            }
+            Button(title = "Sign In", filled = false)
             Spacer(
                 Modifier
                     .fillMaxWidth()
