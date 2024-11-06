@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,7 +25,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -37,7 +35,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.PopupProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.epds.dev.eauction.ui.theme.AppTheme
 
@@ -48,7 +45,7 @@ fun HomeScreen(name: String,
                avatar: Painter,
                modifier: Modifier) {
 
-    val viewModel: HomeScreenVM = viewModel()
+    val viewModel: BuyersViewModel = viewModel()
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -107,7 +104,7 @@ private fun Header(
 }
 
 @Composable
-private fun SearchBox(viewModel: HomeScreenVM){
+private fun SearchBox(viewModel: BuyersViewModel){
     Row (
         Modifier
             .border(1.5.dp, AppTheme.colors.base400, shape = RoundedCornerShape(64.dp))
@@ -116,8 +113,8 @@ private fun SearchBox(viewModel: HomeScreenVM){
             .padding(horizontal = 7.dp)
     ) {
         TextField(
-            value = viewModel.text,
-            onValueChange = {viewModel.text = it},
+            value = viewModel.searchText,
+            onValueChange = {viewModel.searchText = it},
             shape = RoundedCornerShape(64.dp),
             textStyle = AppTheme.typography.bodyMedium,
             placeholder = {

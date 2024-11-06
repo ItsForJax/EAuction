@@ -23,6 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.epds.dev.eauction.ui.screens.buyer.auth.StartScreen
+import com.epds.dev.eauction.ui.screens.buyer.main.CreateAuctionPage1Screen
+import com.epds.dev.eauction.ui.screens.buyer.main.CreateAuctionPage2Screen
 import com.epds.dev.eauction.ui.screens.buyer.main.HomeScreen
 import com.epds.dev.eauction.ui.theme.AppTheme
 
@@ -44,12 +47,9 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .padding(WindowInsets.statusBars.asPaddingValues()) // Adds padding for the status bar
                 ) {
-                    HomeScreen(
-                        name = "Mr.Buyer",
-                        status = "Set Status",
-                        avatar = painterResource(R.drawable.avatar),
-                        modifier = Modifier.weight(1f)
-                    )
+//                    StartScreen()
+//                    CreateAuctionPage1Screen(modifier = Modifier.weight(1f))
+                    CreateAuctionPage2Screen(modifier = Modifier.weight(1f))
                     Column (modifier = Modifier.fillMaxWidth().height(75.dp).background(Color.Red)) {
                         Text("Sudo")
                     }
