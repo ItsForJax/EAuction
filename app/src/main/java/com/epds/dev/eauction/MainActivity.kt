@@ -40,6 +40,7 @@ class MainActivity : ComponentActivity() {
             AppTheme {
                 Column(
                     modifier = Modifier
+                        .background(AppTheme.colors.white)
                         .fillMaxSize()
                         .padding(WindowInsets.statusBars.asPaddingValues()) // Adds padding for the status bar
                 ) {
