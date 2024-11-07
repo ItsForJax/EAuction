@@ -11,11 +11,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import org.w3c.dom.Text
 
 private val interFontFamily = FontFamily(
     Font(R.font.inter_bold, FontWeight.Bold, FontStyle.Normal),
     Font(R.font.inter_regular, FontWeight.Normal, FontStyle.Normal),
     Font(R.font.inter_semi_bold, FontWeight.SemiBold, FontStyle.Normal),
+    Font(R.font.inter_medium, FontWeight.Medium, FontStyle.Normal),
 )
 
 @Immutable
@@ -29,6 +31,7 @@ data class AppTypography(
     val span14px: TextStyle,
     val buttonLarge: TextStyle,
     val semiBold: TextStyle,
+    val medium: TextStyle,
     val messageSeen: TextStyle,
     val messageNotSeen: TextStyle,
 )
@@ -46,6 +49,7 @@ val localAppTypography = staticCompositionLocalOf {
         semiBold = TextStyle.Default,
         messageSeen = TextStyle.Default,
         messageNotSeen = TextStyle.Default,
+        medium = TextStyle.Default
     )
 }
 
@@ -120,4 +124,11 @@ val extendedTypography = AppTypography(
         fontSize = 14.sp,
         lineHeight = 20.sp
     ),
+
+    medium = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 20.sp
+    )
 )

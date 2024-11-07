@@ -12,6 +12,7 @@ val Base600 = Color(0xFF717D96)
 val Base700 = Color(0xFF4A5468)
 val Base800 = Color(0xFF2D3648)
 val Base900 = Color(0xFF1A202C)
+val Black = Color.Black
 val SecondaryContainer = Color(0XFFE8DEF8)
 
 @Immutable
@@ -24,7 +25,8 @@ data class AppColors(
     val base700: Color,
     val base800: Color,
     val base900: Color,
-    val secondaryContainer: Color
+    val secondaryContainer: Color,
+    val black: Color,
 )
 
 val localAppColors = staticCompositionLocalOf {
@@ -37,7 +39,8 @@ val localAppColors = staticCompositionLocalOf {
         base700 = Color.Unspecified,
         base800 = Color.Unspecified,
         base900 = Color.Unspecified,
-        secondaryContainer = Color.Unspecified
+        secondaryContainer = Color.Unspecified,
+        black = Color.Unspecified,
     )
 }
 
@@ -50,5 +53,6 @@ val extendedColors = AppColors(
     base700 = Base700,
     base800 = Base800,
     base900 = Base900,
-    secondaryContainer = SecondaryContainer
+    secondaryContainer = SecondaryContainer,
+    black = Black
 )
