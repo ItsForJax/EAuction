@@ -1,18 +1,23 @@
 package com.epds.dev.eauction.ui.screens.buyer.main
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import com.epds.dev.eauction.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,9 +39,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.epds.dev.eauction.ui.theme.AppTheme
 import java.sql.Time
 import java.text.SimpleDateFormat
@@ -49,33 +57,162 @@ fun InboxScreen(modifier: Modifier) {
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)) {
+        Spacer(Modifier.height(14.dp))
         Switch()
         Spacer(Modifier.height(14.dp))
-        var scrollState = rememberScrollState()
-        fun formatTime(time: Time): String {
-            val formatter = SimpleDateFormat("hh:mma", Locale.getDefault())
-            return formatter.format(time).uppercase(Locale.getDefault())
-        }
-        Column (Modifier.verticalScroll(scrollState)) {
-            Message(
-                name = "Batman Ako",
-                lastMessage = "Kupal ka ba bossing? HAHAHAHAHA",
-                time = formatTime(Time(SimpleDateFormat("hh:mm a", Locale.getDefault()).parse("11:35 PM")!!.time)),
-                seen = false,
-                read = false,
-                profilePic = painterResource(R.drawable.malupiton),
-            )
-            for (x in 1..25) {
-                Message(
-                    name = "Name $x",
-                    lastMessage = "Hello Name $x",
-                    time = formatTime(Time(SimpleDateFormat("hh:mm a", Locale.getDefault()).parse("12:${x} PM")!!.time)),
-                    seen = x%2 == 1,
-                    read = x%2 == 1,
-                    profilePic = painterResource(R.drawable.sample_profile),
+        var chatScrollState = rememberScrollState()
+        var notificationScrollState = rememberScrollState()
+//        Chats(chatScrollState)
+        Notification(notificationScrollState)
+    }
+}
+
+
+// Notification Related
+@Composable
+fun Notification(scrollState: ScrollState) {
+    Column(Modifier.verticalScroll(scrollState)) {
+        Divider("Today")
+        Spacer(Modifier.height(14.dp))
+        NotificationRow(
+            title = "SampleSampleSampleSampleSampleSampleSampleSample",
+            message = "Sample",
+            viewed = true
+        )
+        Spacer(Modifier.height(14.dp))
+        NotificationRow(
+            title = "SampleSampleSampleSampleSampleSampleSampleSample",
+            message = "Sample",
+            viewed = false
+        )
+    }
+}
+
+@Composable
+fun NotificationRow(title: String, message: String, viewed: Boolean) {
+    Row (verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)) {
+
+        Box(modifier = Modifier.size(52.dp).border(0.5.dp, Color(0xFF2D3648), CircleShape)) {
+
+            Image(painterResource(R.drawable.notification), contentDescription = "",
+                contentScale = ContentScale.Fit, modifier = Modifier.align(Alignment.Center).height(26.dp))
+
+            if (!viewed) {
+                Spacer(
+                    modifier = Modifier
+                        .size(10.dp)
+                        .offset(x = 37.dp, y = 2.dp)
+                        .background(Color(0xFF2D3648), CircleShape)
                 )
             }
+
         }
+
+        var font = if (!viewed) { AppTheme.typography.semiBold.copy(fontSize = 16.sp, fontWeight = FontWeight.Bold) } else { AppTheme.typography.semiBold.copy(fontSize = 16.sp) }
+        var font2 = if (!viewed) { AppTheme.typography.medium.copy(fontSize = 16.sp) } else { AppTheme.typography.medium.copy(fontSize = 16.sp, fontWeight = FontWeight.Normal) }
+
+        Spacer(Modifier.width(12.dp))
+        Column (modifier = Modifier.weight(1f, fill = false)) {
+            Text(text = title, style = font, color = AppTheme.colors.black,
+                maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Spacer(Modifier.height(2.dp))
+            Text(text = message, style = font2, color = AppTheme.colors.black,
+                maxLines = 1, overflow = TextOverflow.Ellipsis )
+        }
+        Spacer(Modifier.width(12.dp))
+
+        Column(verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.width(4.dp)) {
+            Spacer(
+                modifier = Modifier
+                    .size(4.dp)
+                    .background(Color(0xFF333333), CircleShape)
+            )
+            Spacer(Modifier.height(2.dp))
+            Spacer(
+                modifier = Modifier
+                    .size(4.dp)
+                    .background(Color(0xFF333333), CircleShape)
+            )
+            Spacer(Modifier.height(2.dp))
+            Spacer(
+                modifier = Modifier
+                    .size(4.dp)
+                    .background(Color(0xFF333333), CircleShape)
+            )
+        }
+
+    }
+}
+
+@Composable
+fun Divider(title: String) {
+    Row (
+        verticalAlignment = Alignment.Bottom,
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)) {
+        Text(text = title, style = AppTheme.typography.medium, color = Color(0xFFA3A3A3))
+        Spacer(Modifier.width(5.dp))
+        Spacer(Modifier.height(1.5.dp).background(Color(0xFFEEEEEE)).fillMaxWidth())
+    }
+}
+
+
+// Chats related
+@Composable
+private fun Chats(scrollState: ScrollState) {
+    fun formatTime(time: Time): String {
+        val formatter = SimpleDateFormat("hh:mma", Locale.getDefault())
+        return formatter.format(time).uppercase(Locale.getDefault())
+    }
+    Column(Modifier.verticalScroll(scrollState)) {
+        Message(
+            name = "Batman Ako",
+            lastMessage = "Kupal ka ba bossing? HAHAHAHAHA",
+            time = formatTime(
+                Time(
+                    SimpleDateFormat(
+                        "hh:mm a",
+                        Locale.getDefault()
+                    ).parse("11:35 PM")!!.time
+                )
+            ),
+            seen = false,
+            read = false,
+            profilePic = painterResource(R.drawable.squidward),
+        )
+        Message(
+            name = "Qpalized You Mamba",
+            lastMessage = "You: Sheeeeesh",
+            time = formatTime(
+                Time(
+                    SimpleDateFormat(
+                        "hh:mm a",
+                        Locale.getDefault()
+                    ).parse("11:35 PM")!!.time
+                )
+            ),
+            seen = false,
+            read = true,
+            profilePic = painterResource(R.drawable.malupiton),
+        )
+
+        Message(
+            name = "Jorayne Alieza Licudan",
+            lastMessage = "You: Gutom Na AKooo!!!",
+            time = formatTime(
+                Time(
+                    SimpleDateFormat(
+                        "hh:mm a",
+                        Locale.getDefault()
+                    ).parse("11:35 PM")!!.time
+                )
+            ),
+            seen = true,
+            read = true,
+            profilePic = painterResource(R.drawable.sample_profile),
+        )
     }
 }
 
@@ -84,23 +221,22 @@ fun InboxScreen(modifier: Modifier) {
 fun Message(name: String, lastMessage: String, time: String, seen: Boolean, read: Boolean, profilePic: Painter) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth()) {
+        modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp)) {
         Image(
             painter = profilePic,
             contentDescription = "",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .clip(CircleShape)
-                .size(58.dp)
-                .padding(bottom = 12.dp),
+                .size(60.dp)
+                .clip(CircleShape),
 
         )
-        var textStyle = if (seen) AppTheme.typography.messageSeen else AppTheme.typography.messageNotSeen
-        var textColor = AppTheme.colors.base800
+        var textStyle = if (read) AppTheme.typography.messageSeen else AppTheme.typography.messageNotSeen
+        var textColor = AppTheme.colors.black
         Column (
-            modifier = Modifier.padding(start = 8.dp)) {
-            Text(text = name, style = textStyle.copy(fontSize = 16.sp), color = textColor, maxLines = 1,
-                overflow = TextOverflow.Ellipsis)
+            modifier = Modifier.padding(start = 12.dp).weight(1f, fill = false)) {
+            Text(text = name, style =  AppTheme.typography.messageNotSeen.copy(fontSize = 17.sp), color = textColor, maxLines = 1,
+                overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(bottom = 4.dp))
             Row (horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()){
                 Row (verticalAlignment = Alignment.CenterVertically,
@@ -111,17 +247,18 @@ fun Message(name: String, lastMessage: String, time: String, seen: Boolean, read
                     Text(text = " • ", style = textStyle, color = textColor)
                     Text(text = time, style = textStyle, color = textColor, maxLines = 1)
                 }
-                if (seen) {
-                    Image(
-                        painter = profilePic,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(16.dp)
-                    )
-                }
-
             }
+        }
+        if (seen) {
+            Spacer(Modifier.width(12.dp))
+            Image(
+                painter = profilePic,
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(16.dp)
+            )
         }
     }
 }
