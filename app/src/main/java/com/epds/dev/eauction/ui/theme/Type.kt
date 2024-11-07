@@ -28,7 +28,9 @@ data class AppTypography(
     val bodyMedium: TextStyle,
     val span14px: TextStyle,
     val buttonLarge: TextStyle,
-    val semiBold: TextStyle
+    val semiBold: TextStyle,
+    val messageSeen: TextStyle,
+    val messageNotSeen: TextStyle,
 )
 
 val localAppTypography = staticCompositionLocalOf {
@@ -41,7 +43,9 @@ val localAppTypography = staticCompositionLocalOf {
         bodyMedium = TextStyle.Default,
         span14px = TextStyle.Default,
         buttonLarge = TextStyle.Default,
-        semiBold = TextStyle.Default
+        semiBold = TextStyle.Default,
+        messageSeen = TextStyle.Default,
+        messageNotSeen = TextStyle.Default,
     )
 }
 
@@ -101,5 +105,19 @@ val extendedTypography = AppTypography(
         fontSize = 14.sp,
         lineHeight = 24.sp,
         letterSpacing = (-0.01).em
-    )
+    ),
+
+    messageSeen = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+    ),
+
+    messageNotSeen = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+        lineHeight = 20.sp
+    ),
 )
