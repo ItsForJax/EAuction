@@ -58,12 +58,16 @@ fun InboxScreen(modifier: Modifier) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp)) {
         Spacer(Modifier.height(14.dp))
-        Switch()
-        Spacer(Modifier.height(14.dp))
         var chatScrollState = rememberScrollState()
         var notificationScrollState = rememberScrollState()
-//        Chats(chatScrollState)
-        Notification(notificationScrollState)
+        if (switch()) {
+            Spacer(Modifier.height(14.dp))
+            Chats(chatScrollState)
+        } else {
+            Spacer(Modifier.height(14.dp))
+            Notification(notificationScrollState)
+        }
+
     }
 }
 
@@ -73,17 +77,37 @@ fun InboxScreen(modifier: Modifier) {
 fun Notification(scrollState: ScrollState) {
     Column(Modifier.verticalScroll(scrollState)) {
         Divider("Today")
+        Spacer(Modifier.height(12.dp))
+        NotificationRow(
+            title = "New Bid - Laptop Auction",
+            message = "Supplier Z updated their bidding.",
+            viewed = false
+        )
         Spacer(Modifier.height(14.dp))
         NotificationRow(
-            title = "SampleSampleSampleSampleSampleSampleSampleSample",
-            message = "Sample",
+            title = "New Bid - Desktop Auction",
+            message = "Supplier H updated their bidding.",
+            viewed = false
+        )
+        Spacer(Modifier.height(14.dp))
+        NotificationRow(
+            title = "New Bid - Laptop Auction",
+            message = "Supplier C updated their bidding.",
+            viewed = false
+        )
+        Spacer(Modifier.height(14.dp))
+        Divider("Yesterday")
+        Spacer(Modifier.height(14.dp))
+        NotificationRow(
+            title = "New Bid - Laptop Auction",
+            message = "Supplier A updated their bidding.",
             viewed = true
         )
         Spacer(Modifier.height(14.dp))
         NotificationRow(
-            title = "SampleSampleSampleSampleSampleSampleSampleSample",
-            message = "Sample",
-            viewed = false
+            title = "New Bid - Laptop Auction",
+            message = "Supplier B updated their bidding.",
+            viewed = true
         )
     }
 }
@@ -109,8 +133,8 @@ fun NotificationRow(title: String, message: String, viewed: Boolean) {
 
         }
 
-        var font = if (!viewed) { AppTheme.typography.semiBold.copy(fontSize = 16.sp, fontWeight = FontWeight.Bold) } else { AppTheme.typography.semiBold.copy(fontSize = 16.sp) }
-        var font2 = if (!viewed) { AppTheme.typography.medium.copy(fontSize = 16.sp) } else { AppTheme.typography.medium.copy(fontSize = 16.sp, fontWeight = FontWeight.Normal) }
+        var font = if (!viewed) { AppTheme.typography.semiBold.copy(fontWeight = FontWeight.Bold) } else { AppTheme.typography.semiBold }
+        var font2 = if (!viewed) { AppTheme.typography.medium } else { AppTheme.typography.medium.copy(fontWeight = FontWeight.Normal) }
 
         Spacer(Modifier.width(12.dp))
         Column (modifier = Modifier.weight(1f, fill = false)) {
@@ -168,7 +192,7 @@ private fun Chats(scrollState: ScrollState) {
     }
     Column(Modifier.verticalScroll(scrollState)) {
         Message(
-            name = "Batman Ako",
+            name = "Squidward Tentacles",
             lastMessage = "Kupal ka ba bossing? HAHAHAHAHA",
             time = formatTime(
                 Time(
@@ -183,8 +207,8 @@ private fun Chats(scrollState: ScrollState) {
             profilePic = painterResource(R.drawable.squidward),
         )
         Message(
-            name = "Qpalized You Mamba",
-            lastMessage = "You: Sheeeeesh",
+            name = "Sandy Cheeks",
+            lastMessage = "You: Ayos pala eh",
             time = formatTime(
                 Time(
                     SimpleDateFormat(
@@ -195,12 +219,12 @@ private fun Chats(scrollState: ScrollState) {
             ),
             seen = false,
             read = true,
-            profilePic = painterResource(R.drawable.malupiton),
+            profilePic = painterResource(R.drawable.sandy),
         )
 
         Message(
-            name = "Jorayne Alieza Licudan",
-            lastMessage = "You: Gutom Na AKooo!!!",
+            name = "Spongebob Squarepants",
+            lastMessage = "You: Asan ang sabaw!!!",
             time = formatTime(
                 Time(
                     SimpleDateFormat(
@@ -211,7 +235,23 @@ private fun Chats(scrollState: ScrollState) {
             ),
             seen = true,
             read = true,
-            profilePic = painterResource(R.drawable.sample_profile),
+            profilePic = painterResource(R.drawable.spongebob),
+        )
+
+        Message(
+            name = "Patrik Star",
+            lastMessage = "Crabby pattyyyy",
+            time = formatTime(
+                Time(
+                    SimpleDateFormat(
+                        "hh:mm a",
+                        Locale.getDefault()
+                    ).parse("11:35 PM")!!.time
+                )
+            ),
+            seen = false,
+            read = false,
+            profilePic = painterResource(R.drawable.patrik),
         )
     }
 }
@@ -264,20 +304,21 @@ fun Message(name: String, lastMessage: String, time: String, seen: Boolean, read
 }
 
 @Composable
-fun Switch(){
+fun switch() : Boolean {
+
+    var active by remember { mutableStateOf(true) }
+    var cardColors =
+        CardColors(
+            containerColor = Color(0xFFF5F5F5),
+            contentColor = AppTheme.colors.base800,
+            disabledContentColor = AppTheme.colors.white,
+            disabledContainerColor = AppTheme.colors.base800,
+        )
+
     Row (modifier = Modifier
         .clip(RoundedCornerShape(11.dp))
         .height(32.dp)
         .background(AppTheme.colors.base800)) {
-        var active by remember { mutableStateOf(true) }
-        var cardColors =
-            CardColors(
-                containerColor = Color(0xFFF5F5F5),
-                contentColor = AppTheme.colors.base800,
-                disabledContentColor = AppTheme.colors.white,
-                disabledContainerColor = AppTheme.colors.base800,
-            )
-
         Card(
             colors = cardColors,
             onClick = { active = !active },
@@ -317,4 +358,5 @@ fun Switch(){
 
         }
     }
+    return active
 }
