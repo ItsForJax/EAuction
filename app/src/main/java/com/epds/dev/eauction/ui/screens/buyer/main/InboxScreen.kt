@@ -77,6 +77,7 @@ fun InboxScreen(modifier: Modifier) {
 fun Notification(scrollState: ScrollState) {
     Column(Modifier.verticalScroll(scrollState)) {
         Divider("Today")
+
         Spacer(Modifier.height(12.dp))
         NotificationRow(
             title = "New Bid - Laptop Auction",
