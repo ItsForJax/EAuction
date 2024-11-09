@@ -37,6 +37,7 @@ fun Text() {
         Spacer(Modifier.height(2.dp))
         Spacer(
             modifier = Modifier
+
                 .size(2.dp)
                 .background(Color(0xFF333333), CircleShape)
         )
